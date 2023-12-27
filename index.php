@@ -142,7 +142,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <?php if(!empty($mess)) : ?>
     <?php foreach($mess as $messenger) : ?>
         <div class="container">
-        <img src="bandmember.jpg" alt="Avatar" style="width:100%;">
+        <img src="foto.jpg" alt="Avatar" style="width:100%;">
         <p><?=$messenger['text']; ?></p>
         <span class="time-right"><?=$messenger['date']; ?></span>
         </div>
