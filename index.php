@@ -1,7 +1,14 @@
 <?php
 error_reporting(-1);
+
+
+
+
+//var_dump($uploadfile);
 require_once "config.php";
 require_once "function.php";
+
+
 $db = clear();
 //show_arr($db);
 if(!empty($_POST)){
@@ -12,6 +19,8 @@ if(!empty($_POST)){
 }
 $mess = get_mess();
 #show_arr($mess);
+
+//show_arr($_FILES);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +32,7 @@ $mess = get_mess();
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
+
 
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
@@ -142,8 +152,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <?php if(!empty($mess)) : ?>
     <?php foreach($mess as $messenger) : ?>
         <div class="container">
-        <img src="foto.jpg" alt="Avatar" style="width:100%;">
+        <img src="<?=$messenger['img']; ?>" alt="Avatar" style="width:100%;">
+        <a href='delete.php?id=<?= $messenger['id']; ?>'>
         <p><?=$messenger['text']; ?></p>
+    </a>
         <span class="time-right"><?=$messenger['date']; ?></span>
         </div>
     <?php endforeach; ?>
@@ -152,24 +164,28 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <button class="open-button" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="myForm">
-  <form action="" class="form-container" method="post">
+<form action="" class="form-container" enctype="multipart/form-data" method="post">
     <h1>Chat</h1>
 
     <label for="msg"><b>Message</b></label>
     <textarea placeholder="Type message.." name="text" required></textarea>
-
+     <input type="file" name="userfile" id="">
+    
     <button type="submit" class="btn">Send</button>
+    
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
 
 <script>
+
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
 
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
+  
 }
 </script>
 </body>
